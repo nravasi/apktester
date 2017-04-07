@@ -1,0 +1,3 @@
+rootProject.name = 'apktester'
+include 'main'
+
