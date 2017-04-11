@@ -1,5 +1,6 @@
 package logger
 
+import model.Execution
 import org.apache.commons.io.FileUtils
 
 import java.util.regex.Pattern
@@ -11,6 +12,11 @@ class LogAnalyzer {
 
     def pattern = Pattern.compile(".*objCls: ([^ ]*) mthd: ([^ ]*) .*")
     def res = new HashMap();
+    Execution execution;
+
+    LogAnalyzer(execution){
+        this.execution = execution;
+    }
 
     def getMethodName(String s) {
         def match = pattern.matcher(s);
@@ -32,16 +38,16 @@ class LogAnalyzer {
             output << it + '\n'
         }*/
 
-        res.put(file.name.split(Pattern.quote('.'))[0].split(Pattern.quote("_")).last().toInteger(), methods.size());
+        res.put(file.name.split(Pattern.quote('.'))[0].split(Pattern.quote("_")).last().toInteger() * 10, methods.size());
 
-        FileUtils.copyFile(file, new File("./tmpbk/" + file.name));
-        file.delete()
+//        FileUtils.copyFile(file, new File("./tmpbk/" + file.name));
+//        file.delete()
         return methods
     }
 
 
     def processFiles() {
-        def list = new File('./tmp').listFiles()
+        def list = new File("res/${execution.folderName()}").listFiles()
         list.each {
             if (!it.name.startsWith('.')) processFile(it)
         }

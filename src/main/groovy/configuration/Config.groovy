@@ -17,12 +17,16 @@ public class Config {
     public static String ADV_NAME = "Nexus_7_2012_Edited_API_19";
     public static String ADB_PATH = "/Users/nmravasi/Library/Android/sdk/platform-tools/adb";
     public static String AAPT_PATH = "/Users/nmravasi/Library/Android/sdk/build-tools/19.1.0/aapt";
+    public static String ANDROID_TOOLS_PATH = "/Users/nmravasi/Library/Android/sdk/tools/";
+    public static String EMULATOR_NAME = "thesis";
 
-    public static int minutes =  1;
+    public static int minutes =  2;
+    public static int seconds =  120;
 
     public static int times = 1;
 
     public static boolean shouldInline = false;
+    public static boolean initEmulator = true;
     public static Tool TOOL_TO_USE = Tool.MONKEY;
 
     //Way until kill monkey 30 min would be 18000000 (in milliseconds )

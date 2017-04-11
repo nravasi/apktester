@@ -48,7 +48,7 @@ class MonkeyRunner extends runners.AbstractRunner {
     void testApk(APK apk) {
         println "Running MONKEY";
 
-        def monkeyCmd = "${Config.ADB_PATH} shell monkey -p ${apk.packageName} -v ${2000000}";
+        def monkeyCmd = "${Config.ADB_PATH} shell monkey -p ${apk.packageName} -v ${2000000} --ignore-crashes"
 
         def process = Command.run(monkeyCmd)
 

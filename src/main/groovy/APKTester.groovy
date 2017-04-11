@@ -30,7 +30,6 @@ class APKTester {
 //        if (!ADB.IsDeviceUp()) {
 //            ADB.RunEmulator();
 //        }
-        Command.run("${Config.ADB_PATH} shell rm -rf ${Config.SD_PATH} logs")
         File apksPath = new File(Config.APKS_PATH);
 
         if (Config.shouldInline) {
@@ -72,12 +71,12 @@ class APKTester {
             FileUtils.deleteDirectory(new File(apksPath, 'originals'))
         }
 
-        def apks = apksPath.listFiles().findAll {
+        def apk = apksPath.listFiles().findAll {
             it.name.endsWith('inlined.apk')
-        }.collect { new APK(it) }
+        }.collect { new APK(it) }.first()
 
         def loggerDaemon = new LogDaemon();
-        def runner = AbstractRunner.getRunner(apks, loggerDaemon);
+        def runner = AbstractRunner.getRunner(apk, loggerDaemon);
 
         runner.start();
 

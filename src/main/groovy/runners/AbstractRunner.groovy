@@ -6,18 +6,21 @@ import configuration.Tool
 import logger.LogAnalyzer
 import logger.LogDaemon
 import model.APK
+import model.Execution
 
 /**
  * Created by nmravasi on 10/8/16.
  */
 public abstract class AbstractRunner {
 
-    protected apks;
+    protected Execution execution;
+    protected apk;
     public boolean finished = false;
     LogDaemon loggerDaemon;
 
-    protected AbstractRunner(apks, loggerDaemon) {
-        this.apks = apks;
+    protected AbstractRunner(apk, loggerDaemon) {
+        this.execution = new Execution(apk)
+        this.apk = apk
         this.loggerDaemon = loggerDaemon;
     }
 
@@ -39,16 +42,12 @@ public abstract class AbstractRunner {
 
         beforeStart();
 
-        apks.each { apk ->
-            Config.times.times {
-                beforeApk(apk)
-                loggerDaemon.notifyStart(apk)
-                testApk(apk)
-                loggerDaemon.notifyFinish()
-                afterApk(apk)
-                done(apk)
-            }
-        }
+        beforeApk(apk)
+        loggerDaemon.notifyStart(execution)
+        testApk(apk)
+        loggerDaemon.notifyFinish()
+        afterApk(apk)
+        done(apk)
 
         println "All APks runned OK"
 
@@ -56,22 +55,37 @@ public abstract class AbstractRunner {
     }
 
     def done(APK apk) {
-        def analyzer = new LogAnalyzer();
+        def analyzer = new LogAnalyzer(execution);
         def res = analyzer.processFiles();
         println(res)
-        writeOutput(res, apk)
+        writeOutput(res)
     }
 
-    def writeOutput(HashMap hashMap, apk) {
-        def outputFile = new File("./res/${apk.appName}_${Config.TOOL_TO_USE}.txt")
-        outputFile << "Minutes\tMethods\n"
+    def writeOutput(HashMap hashMap) {
+        def outputFile = new File("./res/${execution.folderName()}/summary.txt")
+        outputFile << "Seconds\tMethods\n"
         hashMap.keySet().sort().each {
             outputFile << "${it}\t${hashMap[it]}\n"
         }
     }
 
     public void beforeStart() {
+
+        if (Config.initEmulator) {
+            println 'starting emulator'
+            Command.run("nohup ${Config.ANDROID_TOOLS_PATH}emulator -avd ${Config.EMULATOR_NAME}")
+            println 'waiting for device'
+            Command.runAndRead("${Config.ADB_PATH} wait-for-device")
+        }
+
+        println 'pushing apk'
         Command.runAndRead("${Config.ADB_PATH} push utils/monitor_api19.apk /data/local/tmp/monitor.apk");
+
+
+        println 'deleting logs'
+        Command.run("${Config.ADB_PATH} shell rm -rf ${Config.SD_PATH} logs")
+
+        new File("res/${execution.folderName()}").mkdirs()
     };
 
     public abstract void testApk(APK apk);

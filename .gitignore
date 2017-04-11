@@ -2,6 +2,8 @@
 build/
 .idea
 .DS_Store
+inlined_apks
+tmpbk
 
 
 # Ignore Gradle GUI config

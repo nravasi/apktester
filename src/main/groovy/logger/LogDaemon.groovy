@@ -3,6 +3,7 @@ package logger
 import configuration.Command
 import configuration.Config
 import model.APK
+import model.Execution
 
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
@@ -18,10 +19,10 @@ class LogDaemon {
     ScheduledFuture<?> future;
 
 
-    def notifyStart(APK apk) {
+    def notifyStart(Execution execution) {
         println("Instantiating daemon")
-        def retriever = new LogRetriever(apk)
-        future = executor.scheduleAtFixedRate(retriever, 1, 1, TimeUnit.MINUTES)
+        def retriever = new LogRetriever(execution)
+        future = executor.scheduleAtFixedRate(retriever, 10, 10, TimeUnit.SECONDS)
     }
 
     def notifyFinish() {
@@ -30,10 +31,10 @@ class LogDaemon {
 
     private class LogRetriever implements Runnable {
 
-        APK apk;
+        Execution execution;
 
-        LogRetriever(APK apk) {
-            this.apk = apk;
+        LogRetriever(Execution execution) {
+            this.execution = execution;
         }
 
         int timestamp = 0; //This represents the nth minute where it's run
@@ -42,32 +43,10 @@ class LogDaemon {
         void run() {
             timestamp++;
             println("Executing retriever for iteration no.$timestamp")
-            def cmd = "${Config.ADB_PATH} pull ${Config.SD_PATH_REL}logs/${apk.appName}.txt tmp/${apk.appName}_${timestamp}.txt"
+            def cmd = "${Config.ADB_PATH} pull ${Config.SD_PATH_REL}logs/${execution.apk.appName}.txt ./res/${execution.folderName()}/log_${String.format("%05d", timestamp)}.txt"
+            println cmd
             def run = Command.run(cmd);
-            println("Retrieved ${apk.appName}_${timestamp}.txt file")
+            println("Retrieved log_${timestamp}.txt file")
         }
     }
-
-
-    private class LogGetter implements Runnable {
-
-        APK apk;
-
-        LogGetter(APK apk) {
-            this.apk = apk;
-        }
-
-        int timestamp = 0; //This represents the nth minute where it's run
-
-        @Override
-        void run() {
-            timestamp++;
-            println("Executing retriever for iteration no.$timestamp")
-            def cmd = "${Config.ADB_PATH} pull ${Config.SD_PATH}logs/${apk.appName}.txt tmp\\${apk.appName}_${timestamp}.txt"
-            def run = Command.run(cmd);
-            println("Retrieved ${apk.appName}.txt file for the ${timestamp} iteration")
-
-        }
-    }
-
 }
