@@ -1,10 +1,9 @@
-
 import configuration.Command
 import configuration.Config
 import logger.LogDaemon
 import model.APK
-import runners.AbstractRunner
 import org.apache.commons.io.FileUtils
+import runners.AbstractRunner
 
 import java.nio.file.Paths
 
@@ -30,6 +29,15 @@ class APKTester {
 //        if (!ADB.IsDeviceUp()) {
 //            ADB.RunEmulator();
 //        }
+
+        File propertiesFile = new File('./apktester.properties');
+
+        if(propertiesFile.exists()){
+            Properties prop = new Properties();
+            prop.load(FileUtils.openInputStream(propertiesFile))
+            Config.updateConfig(prop);
+        }
+
         File apksPath = new File(Config.APKS_PATH);
 
         if (Config.shouldInline) {
@@ -71,14 +79,16 @@ class APKTester {
             FileUtils.deleteDirectory(new File(apksPath, 'originals'))
         }
 
-        def apk = apksPath.listFiles().findAll {
+        apksPath.listFiles().findAll {
             it.name.endsWith('inlined.apk')
-        }.collect { new APK(it) }.first()
+        }.collect { new APK(it) }.each { apk ->
+            Config.times.times {
+                def loggerDaemon = new LogDaemon();
+                def runner = AbstractRunner.getRunner(apk, loggerDaemon);
 
-        def loggerDaemon = new LogDaemon();
-        def runner = AbstractRunner.getRunner(apk, loggerDaemon);
-
-        runner.start();
+                runner.start();
+            }
+        }
 
         System.exit(0)
     }

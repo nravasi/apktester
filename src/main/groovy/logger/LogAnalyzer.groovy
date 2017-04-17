@@ -1,7 +1,6 @@
 package logger
 
 import model.Execution
-import org.apache.commons.io.FileUtils
 
 import java.util.regex.Pattern
 
@@ -12,6 +11,7 @@ class LogAnalyzer {
 
     def pattern = Pattern.compile(".*objCls: ([^ ]*) mthd: ([^ ]*) .*")
     def res = new HashMap();
+    def methodList = new HashSet();
     Execution execution;
 
     LogAnalyzer(execution){
@@ -47,9 +47,14 @@ class LogAnalyzer {
 
 
     def processFiles() {
+        def temp = new HashSet()
         def list = new File("res/${execution.folderName()}").listFiles()
         list.each {
-            if (!it.name.startsWith('.')) processFile(it)
+            if (!it.name.startsWith('.'))
+                temp = processFile(it)
+            if (methodList.size() < temp.size()) {
+                methodList = temp
+            }
         }
 
         return res;

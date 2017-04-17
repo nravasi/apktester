@@ -20,7 +20,7 @@ class Execution {
     }
 
     String folderName(){
-        return "${Config.TOOL_TO_USE}-${apk.appName}-${executionDate}"
+        return "${Config.toolToUse}-${apk.appName}-${executionDate}"
     }
 
 }

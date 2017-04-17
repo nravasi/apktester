@@ -25,7 +25,7 @@ public abstract class AbstractRunner {
     }
 
     public static AbstractRunner getRunner(apks, loggerDaemon) {
-        switch (Config.TOOL_TO_USE) {
+        switch (Config.toolToUse) {
             case Tool.MONKEY:
                 return new MonkeyRunner(apks, loggerDaemon);
                 break
@@ -49,8 +49,6 @@ public abstract class AbstractRunner {
         afterApk(apk)
         done(apk)
 
-        println "All APks runned OK"
-
         finished = true;
     }
 
@@ -58,14 +56,24 @@ public abstract class AbstractRunner {
         def analyzer = new LogAnalyzer(execution);
         def res = analyzer.processFiles();
         println(res)
-        writeOutput(res)
+        writeOutput(res, analyzer.methodList)
+
+        if(Config.initEmulator){
+            Command.runAndRead("${Config.ADB_PATH} -s emulator-5554 emu kill")
+        }
     }
 
-    def writeOutput(HashMap hashMap) {
+    def writeOutput(HashMap hashMap, HashSet methods) {
         def outputFile = new File("./res/${execution.folderName()}/summary.txt")
         outputFile << "Seconds\tMethods\n"
         hashMap.keySet().sort().each {
             outputFile << "${it}\t${hashMap[it]}\n"
+        }
+
+        def methodsFile = new File("./res/${execution.folderName()}/summaryMethods.txt")
+
+        methods.each {
+            methodsFile << "${it}\n"
         }
     }
 
@@ -76,6 +84,7 @@ public abstract class AbstractRunner {
             Command.run("nohup ${Config.ANDROID_TOOLS_PATH}emulator -avd ${Config.EMULATOR_NAME}")
             println 'waiting for device'
             Command.runAndRead("${Config.ADB_PATH} wait-for-device")
+            Thread.sleep(15000);
         }
 
         println 'pushing apk'
