@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat
  */
 class Execution {
 
-    static formatter = new SimpleDateFormat("dd-mm-yyyy--hh.mm.ss")
+    static formatter = new SimpleDateFormat("dd-MM-yyyy--hh.mm.ss")
 
     APK apk;
     String executionDate
