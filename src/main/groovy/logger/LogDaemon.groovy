@@ -26,6 +26,7 @@ class LogDaemon {
     }
 
     def notifyFinish() {
+        println 'killing daemon'
         future.cancel(false);
     }
 

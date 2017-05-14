@@ -81,7 +81,7 @@ public abstract class AbstractRunner {
 
         if (Config.initEmulator) {
             println 'starting emulator'
-            Command.run("nohup ${Config.ANDROID_TOOLS_PATH}emulator -avd ${Config.EMULATOR_NAME}")
+            Command.run("nohup ${Config.ANDROID_TOOLS_PATH}emulator -avd ${Config.EMULATOR_NAME} -wipe-data")
             println 'waiting for device'
             Command.runAndRead("${Config.ADB_PATH} wait-for-device")
             Thread.sleep(15000);
@@ -92,7 +92,7 @@ public abstract class AbstractRunner {
 
 
         println 'deleting logs'
-        Command.run("${Config.ADB_PATH} shell rm -rf ${Config.SD_PATH} logs")
+        Command.run("${Config.ADB_PATH} shell rm -rf ${Config.SD_PATH}logs")
 
         new File("res/${execution.folderName()}").mkdirs()
     };

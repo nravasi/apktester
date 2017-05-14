@@ -7,6 +7,8 @@ import configuration.Command
 import configuration.Config
 import model.APK
 
+import java.util.concurrent.TimeUnit
+
 /**
  * Created by nmravasi on 10/8/16.
  */
@@ -48,11 +50,22 @@ class MonkeyRunner extends runners.AbstractRunner {
     void testApk(APK apk) {
         println "Running MONKEY";
 
-        def monkeyCmd = "${Config.ADB_PATH} shell monkey -p ${apk.packageName} -v ${2000000} --ignore-crashes"
+        def monkeyCmd = "${Config.ADB_PATH} shell monkey -p ${apk.packageName} ${Config.MONKEY_OPTIONS} ${Config.monkeyTimes}"
 
-        def process = Command.run(monkeyCmd)
+        println monkeyCmd
+//        int i = 0
 
-        process.waitForOrKill(Config.minutes * 60000)
+        for (long stop=System.nanoTime()+TimeUnit.MINUTES.toNanos(Config.minutes);stop>System.nanoTime();) {
+
+//            println "running monkey ${i}"
+            def process = Command.run(monkeyCmd)
+
+            process.waitFor()
+
+//            i++
+//            println "finished ${i}th monkey execution"
+        }
+
         //This kills monkey running on the device
         Command.run("${Config.ADB_PATH} shell ps | awk '/com\\.android\\.commands\\.monkey/ { system(\"adb shell kill \" \$2) }'")
 

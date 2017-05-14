@@ -7,9 +7,8 @@ import java.lang.reflect.Modifier
  */
 public class Config {
 
-    public static String DROIDMATE_DIR = '/Users/nmravasi/dev/thesis/droidmate/dev/droidmate/';
-    public static String THIS_PATH = '/Users/nmravasi/dev/thesis/tesis-tools/APKTester/';
-    public static String SAPIENZ_DIR = '/Users/nmravasi/dev/thesis/sapienz/';
+    public static String DROIDMATE_DIR = '/Users/nmravasi/thesis/d2/droidmate/dev/droidmate/';
+    public static String SAPIENZ_DIR = '/Users/nmravasi/thesis/sapienz/';
     public static String MONKEY_RUNNER_DIR = '';
     public static String MONITOR_APK_DIR_IN_DEVICE = '';
 //    public static String SD_PATH =  '/storage/emulated/0/';
@@ -22,6 +21,8 @@ public class Config {
     public static String AAPT_PATH = "/Users/nmravasi/Library/Android/sdk/build-tools/19.1.0/aapt";
     public static String ANDROID_TOOLS_PATH = "/Users/nmravasi/Library/Android/sdk/tools/";
     public static String EMULATOR_NAME = "thesis";
+    public static String MONKEY_OPTIONS = "--ignore-crashes --ignore-timeouts";
+    public static String monkeyTimes = 20000;
 
     public static int minutes = 1;
 
@@ -42,6 +43,8 @@ public class Config {
                 if (property) {
                     if (field.getType() == int.class) {
                         field.setInt(Config.class, Integer.parseInt(property))
+                    } else if (field.getType() == boolean.class){
+                        field.setBoolean(Config.class, Boolean.parseBoolean(property))
                     } else if (field.getType() == Tool.class){
                         field.set(Config.class, Tool.valueOf(property))
                     } else {
