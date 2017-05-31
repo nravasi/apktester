@@ -26,13 +26,15 @@ class MonkeyRunner extends runners.AbstractRunner {
     void beforeApk(APK apk) {
         super.beforeApk();
 
-        //remove the apk before install it, if it exists
-        if (ADB.IsAPKInstalled(apk.packageName)) {
+        if (Config.MONKEY_INSTALL) {
+            //remove the apk before install it, if it exists
+            if (ADB.IsAPKInstalled(apk.packageName)) {
 
-            ADB.RemoveAPK(apk.packageName);
+                ADB.RemoveAPK(apk.packageName);
+            }
+
+            ADB.InstallAPK(apk.packageName, apk.file.toString());
         }
-
-        ADB.InstallAPK(apk.packageName, apk.file.toString());
     }
 
     @Override
@@ -60,8 +62,7 @@ class MonkeyRunner extends runners.AbstractRunner {
 //            println "running monkey ${i}"
             def process = Command.run(monkeyCmd)
 
-            process.waitFor()
-
+            process.waitForOrKill(Config.monkeyTimes * 30)
 //            i++
 //            println "finished ${i}th monkey execution"
         }

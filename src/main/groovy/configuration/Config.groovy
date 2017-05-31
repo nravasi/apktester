@@ -22,7 +22,8 @@ public class Config {
     public static String ANDROID_TOOLS_PATH = "/Users/nmravasi/Library/Android/sdk/tools/";
     public static String EMULATOR_NAME = "thesis";
     public static String MONKEY_OPTIONS = "--ignore-crashes --ignore-timeouts";
-    public static String monkeyTimes = 20000;
+    public static boolean MONKEY_INSTALL = true
+    public static int monkeyTimes = 20000;
 
     public static int minutes = 1;
 

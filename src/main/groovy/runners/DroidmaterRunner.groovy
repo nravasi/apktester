@@ -17,6 +17,8 @@ import java.util.regex.Pattern
 class DroidmaterRunner extends AbstractRunner {
 
     def timeLimitPattern = Pattern.compile(".*timeLimit (\\d+).*")
+    def timeToRun = Config.minutes * 60 * 1000
+    def bootUpTime = 60000
     private File apksDir
 
     protected DroidmaterRunner(apks, daemon) {
@@ -25,21 +27,27 @@ class DroidmaterRunner extends AbstractRunner {
 
     @Override
     void testApk(APK apk) {
-        println("Executing droidmate for ${apk.appName}")
         def droidmateCmd = Config.DROIDMATE_DIR + 'gradlew -p ' + Config.DROIDMATE_DIR + ' :p:com:run'
-        def process = Command.run(droidmateCmd);
 
-        StreamGobbler errorGobbler = new
-                StreamGobbler(process.getErrorStream(), "ERROR");
+        while (timeToRun > 0) {
+            def process = Command.run(droidmateCmd);
 
-        // any output?
-        StreamGobbler outputGobbler = new
-                StreamGobbler(process.getInputStream(), "OUTPUT");
+            StreamGobbler errorGobbler = new
+                    StreamGobbler(process.getErrorStream(), "ERROR");
 
-        // kick them off
-        errorGobbler.start();
-        outputGobbler.start();
-        def res = process.waitFor()
+            // any output?
+            StreamGobbler outputGobbler = new
+                    StreamGobbler(process.getInputStream(), "OUTPUT");
+
+            // kick them off
+            errorGobbler.start();
+            outputGobbler.start();
+            println("Executing droidmate for ${apk.appName}")
+            def startTime = System.currentTimeMillis()
+            def res = process.waitFor()
+            def duration = System.currentTimeMillis() - startTime
+            timeToRun -= duration
+        }
 
         println("Finished testing apk ${apk.appName}")
 
@@ -49,17 +57,23 @@ class DroidmaterRunner extends AbstractRunner {
     void beforeStart() {
         super.beforeStart()
 
-        println("Modifying args file to specify running minutes")
+        println("!!!!±±±!±Modifying args file to specify running minutes")
 
         def argsFile = Paths.get(Config.DROIDMATE_DIR, 'args.txt').toFile()
         def contents = argsFile.text;
 
+        println contents
+
         def matcher = timeLimitPattern.matcher(contents)
         if (matcher.matches()) {
+            println 'matches'
             contents = contents.replace(matcher.group(1), Integer.toString(Config.minutes * 60));
         } else {
+            println 'not matches'
             contents += " -timeLimit ${Integer.toString(Config.minutes * 60)}"
         }
+
+        println contents
 
         argsFile.write(contents);
 

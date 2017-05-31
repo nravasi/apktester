@@ -54,7 +54,7 @@ class SapienzRunner extends AbstractRunner {
     void beforeApk(APK apk) {
         super.beforeApk()
 
-        def rmSd = '${Config.ADB_PATH} shell rm -f ' + Config.SD_PATH
+        def rmSd = "${Config.ADB_PATH} shell rm -f " + Config.SD_PATH
 
         Command.run(rmSd + 'motifcore*', rmSd + '*strings.xml', rmSd + 'activity.coverage', rmSd + 'skin.coverage')
     }

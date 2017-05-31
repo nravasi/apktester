@@ -22,6 +22,10 @@ class APK {
         setNames(file)
     }
 
+    APK(String name){
+        appName = name
+    }
+
 
     private String setNames(File file) {
 

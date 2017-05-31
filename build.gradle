@@ -16,7 +16,21 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
 
-task run (dependsOn: 'classes', type: JavaExec) {
+task run(dependsOn: 'classes', type: JavaExec) {
     main = 'APKTester'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task analyze(dependsOn: 'classes', type: JavaExec) {
+    main = 'runners.FakeRunner'
+    classpath = sourceSets.main.runtimeClasspath
+    if (project.hasProperty('opt')) {
+        args(opt.split(','))
+    }
+}
+
+
+task extract(dependsOn: 'classes', type: JavaExec) {
+    main = 'SummaryExtractor'
     classpath = sourceSets.main.runtimeClasspath
 }

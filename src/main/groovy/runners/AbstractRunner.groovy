@@ -1,5 +1,6 @@
 package runners
 
+import checkers.CheckerDaemon
 import configuration.Command
 import configuration.Config
 import configuration.Tool
@@ -17,12 +18,16 @@ public abstract class AbstractRunner {
     protected apk;
     public boolean finished = false;
     LogDaemon loggerDaemon;
+    CheckerDaemon checkerDaemon;
 
     protected AbstractRunner(apk, loggerDaemon) {
         this.execution = new Execution(apk)
         this.apk = apk
         this.loggerDaemon = loggerDaemon;
+        checkerDaemon = new CheckerDaemon()
     }
+
+    protected AbstractRunner(){}
 
     public static AbstractRunner getRunner(apks, loggerDaemon) {
         switch (Config.toolToUse) {
@@ -40,25 +45,35 @@ public abstract class AbstractRunner {
 
     public void start() {
 
-        beforeStart();
+        try {
 
-        beforeApk(apk)
-        loggerDaemon.notifyStart(execution)
-        testApk(apk)
-        loggerDaemon.notifyFinish()
-        afterApk(apk)
-        done(apk)
+            beforeStart();
 
+            beforeApk(apk)
+            loggerDaemon.notifyStart(execution)
+            testApk(apk)
+            loggerDaemon.notifyFinish()
+            afterApk(apk)
+            done(apk)
+        } catch (e) {
+            e.printStackTrace()
+            loggerDaemon.notifyFinish()
+            if (Config.initEmulator) {
+                Command.runAndRead("${Config.ADB_PATH} -s emulator-5554 emu kill")
+
+            }
+        }
         finished = true;
     }
 
     def done(APK apk) {
+        checkerDaemon.suspendCheck()
         def analyzer = new LogAnalyzer(execution);
         def res = analyzer.processFiles();
         println(res)
         writeOutput(res, analyzer.methodList)
 
-        if(Config.initEmulator){
+        if (Config.initEmulator) {
             Command.runAndRead("${Config.ADB_PATH} -s emulator-5554 emu kill")
         }
     }
@@ -95,6 +110,8 @@ public abstract class AbstractRunner {
         Command.run("${Config.ADB_PATH} shell rm -rf ${Config.SD_PATH}logs")
 
         new File("res/${execution.folderName()}").mkdirs()
+
+        checkerDaemon.scheduleCheck()
     };
 
     public abstract void testApk(APK apk);

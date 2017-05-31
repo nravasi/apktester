@@ -27,7 +27,7 @@ class LogDaemon {
 
     def notifyFinish() {
         println 'killing daemon'
-        future.cancel(false);
+        future?.cancel(false);
     }
 
     private class LogRetriever implements Runnable {
@@ -44,10 +44,16 @@ class LogDaemon {
         void run() {
             timestamp++;
             println("Executing retriever for iteration no.$timestamp")
-            def cmd = "${Config.ADB_PATH} pull ${Config.SD_PATH_REL}logs/${execution.apk.appName}.txt ./res/${execution.folderName()}/log_${String.format("%05d", timestamp)}.txt"
+
+            def outputFile = "./res/${execution.folderName()}/log_${String.format("%05d", timestamp)}.txt"
+            def cmd = "${Config.ADB_PATH} pull ${Config.SD_PATH_REL}logs/${execution.apk.appName}.txt " + outputFile
             println cmd
             def run = Command.run(cmd);
-            println("Retrieved log_${timestamp}.txt file")
+            if (!new File(outputFile).exists() && timestamp == 1) {
+                timestamp--
+            } else {
+                println("Retrieved log_${timestamp}.txt file")
+            }
         }
     }
 }

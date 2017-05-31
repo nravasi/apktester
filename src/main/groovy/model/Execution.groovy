@@ -23,4 +23,9 @@ class Execution {
         return "${Config.toolToUse}-${apk.appName}-${executionDate}"
     }
 
+    Execution(String name, String exDate){
+        this.apk = new APK(name);
+        this.executionDate =exDate;
+    }
+
 }

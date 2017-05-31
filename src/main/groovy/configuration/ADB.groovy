@@ -8,7 +8,7 @@ class ADB {
     public static void InstallAPK(String packageName, String file){
         println "Installing " + packageName + " ....";
 
-        def installApk = Command.runAndRead("${Config.ADB_PATH} install -r " + file);
+        def installApk = Command.runAndKillAfterTimeout("${Config.ADB_PATH} install -r " + file, 60000);
 
         if (!installApk.contains("Success")) {
             throw new RuntimeException("Something goes wrong installing ${packageName}");

@@ -21,10 +21,10 @@ class Command {
         return process.text.readLines();
     }
 
-    public static ArrayList runAndKillAfterTimeout(String command) {
+    public static ArrayList runAndKillAfterTimeout(String command, int timeout) {
         def process = command.execute();
 
-        process.waitForOrKill(Config.TIMEOUT_BEFORE_KILL);
+        process.waitForOrKill(timeout);
 
         return process.text.readLines();
     }
