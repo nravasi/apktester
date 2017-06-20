@@ -17,6 +17,8 @@ public class FakeRunner extends AbstractRunner {
         super(apk, loggerDaemon);
     }
 
+    def static apps = ["eBay", "Job_Search", "PicsArt", "File_Manager"]
+
     @Override
     public void testApk(APK apk) {
 
@@ -35,14 +37,16 @@ public class FakeRunner extends AbstractRunner {
 
             def date = args[2]
             parseExecutionData(tool, name, date)
-        }else{
-            new File('./res').eachDir {
-                new File(it, 'summary.txt').delete()
-                new File(it, 'summaryMethods.txt').delete()
-                def split = it.getName().split('-')
+        } else {
+            new File(Config.RES_PATH).eachDir { file ->
+                if (apps.any { file.name.contains(it) }) {
+                    new File(file, 'summary.txt').delete()
+                    new File(file, 'summaryMethods.txt').delete()
+                    def split = file.getName().split('-')
 
-                if(split && split.size() >= 3){
-                    parseExecutionData(split[0], split[1], split.drop(2).join('-'))
+                    if (split && split.size() >= 3) {
+                        parseExecutionData(split[0], split[1], split.drop(2).join('-'))
+                    }
                 }
             }
         }

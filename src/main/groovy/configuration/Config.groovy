@@ -34,7 +34,9 @@ public class Config {
     public static Tool toolToUse = Tool.DROIDMATE;
 
     //Way until kill monkey 30 min would be 18000000 (in milliseconds )
-    public static int TIMEOUT_BEFORE_KILL = 10000;
+    public static int TIMEOUT_BEFORE_KILL = 10000
+//    public static String RES_PATH = '/Volumes/WD/sent/'
+    public static String RES_PATH = './res/'
 
     static updateConfig(Properties props) {
         Config.class.getDeclaredFields().each { field ->

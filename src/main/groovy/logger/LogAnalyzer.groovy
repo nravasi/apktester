@@ -1,5 +1,6 @@
 package logger
 
+import configuration.Config
 import model.Execution
 
 import java.util.regex.Pattern
@@ -9,9 +10,13 @@ import java.util.regex.Pattern
  */
 class LogAnalyzer {
 
+    public static final String uriClazz = 'android.net.Uri'
     def pattern = Pattern.compile(".*objCls: ([^ ]*) mthd: ([^ ]*) .* params: (.*) stacktrace.*")
     def res = new HashMap();
     def methodList = new HashSet();
+    int lastLine = 0
+    def mediaContentStr = "content://media/external/images/media/"
+    int accum = 0
     Execution execution;
 
     LogAnalyzer(execution) {
@@ -25,23 +30,44 @@ class LogAnalyzer {
             if (blacklisted(method)) return null
 
             def params = match.group(3);
-            def parsedParams = params ? parseParams(params.trim()) : ''
+            def clazz = match.group(1)
+            def uri = '', parsedParams = ''
+            if (params) {
+                def res = parseParams(params.trim());
+                parsedParams = res.params
+                uri = res.uri
+            }
 
+            def formatted = "${clazz}.${method}(${parsedParams})".toString()
 
-            return "${match.group(1)}.${method}(${parsedParams})"
+            if (!ApiFilters.isValidApi(formatted)) return null
+
+            return uri ? formatted + ' ' + uri : formatted
         }
     }
 
-    String parseParams(str) {
+    def parseParams(str) {
         def splt = str.split(' ')
 
         def res = []
 
-        for (int i = 0; i < splt.size(); i += 2) {
-            res.add(splt[i]);
+        String uri = ''
+
+        boolean isUri
+
+        for (int i = 0; i < splt.size(); i += 1) {
+            if (i % 2 == 0) {
+                isUri = (splt[i] == uriClazz)
+                res.add(splt[i]);
+            } else {
+                if (isUri) {
+                    uri = splt[i]
+                    if(uri?.startsWith(mediaContentStr)) uri = mediaContentStr
+                }
+            }
         }
 
-        return res.join(', ')
+        return [params: res.join(', '), uri: uri]
     }
 
     boolean blacklisted(String methodName) {
@@ -58,9 +84,11 @@ class LogAnalyzer {
     }
 
     def processFile(File file) {
-        def methods = new HashSet()
+        def methods = new HashSet(methodList)
 
-        file.eachLine {
+        file.eachLine { it, idx ->
+            if (idx < lastLine) return
+            lastLine++
             def name = getMethodName(it)
             name && methods << name;
         }
@@ -80,15 +108,18 @@ class LogAnalyzer {
 
     def processFiles() {
         def temp = new HashSet()
-        def list = new File("res/${execution.folderName()}").listFiles()
+
+        def file = new File("${Config.RES_PATH}${execution.folderName()}")
+        println file.name
+        def list = file.listFiles().sort()
         list.each {
-            if (it.name.startsWith('log_'))
+            if (it.name.startsWith('log_')) {
                 temp = processFile(it)
-            if (methodList.size() < temp.size()) {
-                methodList = temp
+                methodList.addAll(temp)
             }
         }
 
         return res;
     }
+
 }

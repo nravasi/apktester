@@ -79,15 +79,15 @@ public abstract class AbstractRunner {
     }
 
     def writeOutput(HashMap hashMap, HashSet methods) {
-        def outputFile = new File("./res/${execution.folderName()}/summary.txt")
+        def outputFile = new File("${Config.RES_PATH}${execution.folderName()}/summary.txt")
         outputFile << "Seconds\tMethods\n"
         hashMap.keySet().sort().each {
             outputFile << "${it}\t${hashMap[it]}\n"
         }
 
-        def methodsFile = new File("./res/${execution.folderName()}/summaryMethods.txt")
+        def methodsFile = new File("${Config.RES_PATH}${execution.folderName()}/summaryMethods.txt")
 
-        methods.each {
+        methods.toList().sort().each {
             methodsFile << "${it}\n"
         }
     }

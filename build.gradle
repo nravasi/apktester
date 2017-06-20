@@ -34,3 +34,13 @@ task extract(dependsOn: 'classes', type: JavaExec) {
     main = 'SummaryExtractor'
     classpath = sourceSets.main.runtimeClasspath
 }
+
+task csv(dependsOn: 'classes', type: JavaExec) {
+    main = 'CSVGenerator'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task merge(dependsOn: 'classes', type: JavaExec) {
+    main = 'SummaryMerger'
+    classpath = sourceSets.main.runtimeClasspath
+}
