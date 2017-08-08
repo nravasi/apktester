@@ -16,7 +16,7 @@ class CSVGenerator {
     public static void main(String[] args) {
         def sendDir = new File('./sent/')
 
-        def output = []
+        def output = ["Tool,App,Index,Minutes,Permissions"]
 
         sendDir.eachFile { file ->
             def matcher = pattern.matcher(file.getName());

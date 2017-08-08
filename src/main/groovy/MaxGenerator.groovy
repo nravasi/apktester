@@ -11,7 +11,7 @@ class MaxGenerator {
     public static void main(String[] args) {
         def sendDir = new File('./sent/')
 
-        def output = []
+        def output = ["Tool,App,Minutes,Permissions"]
 
         def organizedFiles = [:]
 
