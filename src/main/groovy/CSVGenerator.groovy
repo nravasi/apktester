@@ -36,7 +36,7 @@ class CSVGenerator {
                     }
 
                     def idxint = Integer.parseInt(idx)
-                    if (idxint <= 10) {
+                    if (idxint <= 10 && it == 120) {
                         sums[tool][idxint - 1] += Integer.parseInt(value)
                     }
 
