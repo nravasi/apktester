@@ -33,12 +33,12 @@ class CSVGenerator {
                         def line = summary.find { it.startsWith(seconds.toString()) } ?: summary.last()
                         value = line.split('\t')[1]
                     } else {
-                        value = 0
+                        value = "0"
                     }
 
                     def idxint = Integer.parseInt(idx)
-                    if(idxint <= 10){
-                        sums[tool][idxint-1] += Integer.parseInt(value)
+                    if (idxint <= 10) {
+                        sums[tool][idxint - 1] += Integer.parseInt(value)
                     }
 
                     output << [tool, app, idx, it, value].join(',')
@@ -52,6 +52,13 @@ class CSVGenerator {
             }
         }
 
-        println(sums)
+        new File('./sums.csv').withWriter { out ->
+            sums.each { k, v ->
+                v.eachWithIndex { val, idx ->
+                    out.println([k, idx + 1, val].join(','))
+                }
+            }
+        }
+
     }
 }
