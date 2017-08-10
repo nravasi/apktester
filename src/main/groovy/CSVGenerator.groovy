@@ -14,7 +14,6 @@ class CSVGenerator {
 
         def output = ["Tool,App,Index,Minutes,Permissions"]
 
-        def outputSum = ["Tool,App,Index,Minutes,Permissions"]
 
         def sums = ["MONKEY": [0] * 10, "SAPIENZ": [0] * 10, "DROIDMATE": [0] * 10]
 
@@ -53,6 +52,7 @@ class CSVGenerator {
         }
 
         new File('./sums.csv').withWriter { out ->
+            out.println "Tool,Index,Permissions"
             sums.each { k, v ->
                 v.eachWithIndex { val, idx ->
                     out.println([k, idx + 1, val].join(','))
