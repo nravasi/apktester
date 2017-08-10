@@ -1,7 +1,3 @@
-import configuration.Config
-
-import java.nio.file.Files
-import java.nio.file.StandardCopyOption
 import java.util.regex.Pattern
 
 /**
@@ -17,6 +13,10 @@ class CSVGenerator {
         def sendDir = new File('./sent/')
 
         def output = ["Tool,App,Index,Minutes,Permissions"]
+
+        def outputSum = ["Tool,App,Index,Minutes,Permissions"]
+
+        def sums = ["MONKEY": [0] * 10, "SAPIENZ": [0] * 10, "DROIDMATE": [0] * 10]
 
         sendDir.eachFile { file ->
             def matcher = pattern.matcher(file.getName());
@@ -36,6 +36,11 @@ class CSVGenerator {
                         value = 0
                     }
 
+                    def idxint = Integer.parseInt(idx)
+                    if(idxint <= 10){
+                        sums[tool][idxint-1] += Integer.parseInt(value)
+                    }
+
                     output << [tool, app, idx, it, value].join(',')
                 }
             }
@@ -47,6 +52,6 @@ class CSVGenerator {
             }
         }
 
-
+        println(sums)
     }
 }
