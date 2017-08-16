@@ -1,0 +1,6 @@
+android.content.ContentResolver.insert(android.net.Uri, android.content.ContentValues) content://media/external/images/media
+android.content.ContentResolver.insert(android.net.Uri, android.content.ContentValues) content://media/external/images/thumbnails
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://settings/system
+android.hardware.Camera.open(int)
+android.telephony.TelephonyManager.getDeviceId()
+java.net.Socket.<init>()

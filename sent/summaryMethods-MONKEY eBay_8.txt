@@ -1,0 +1,8 @@
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://com.ebay.mobile.providers.itemcacheprovider/name_value
+android.content.ContentResolver.insert(android.net.Uri, android.content.ContentValues) content://com.ebay.mobile.providers.itemcacheprovider/name_value
+android.content.ContentResolver.query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String, android.os.CancellationSignal) content://com.ebay.mobile.ebaysearch/search_suggest_query?limit=50
+android.content.ContentResolver.query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String, android.os.CancellationSignal) content://com.ebay.mobile.providers.itemcacheprovider/name_value
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://settings/system
+android.location.LocationManager.requestLocationUpdates(java.lang.String, long, float, android.location.LocationListener)
+java.net.Socket.<init>()
+java.net.URL.openConnection()

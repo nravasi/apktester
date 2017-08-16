@@ -1,0 +1,6 @@
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://media/external/audio/media
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://media/external/file
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://media/external/images/media
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://media/external/video/media
+android.content.ContentResolver.query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String, android.os.CancellationSignal) content://com.google.plus.platform/token
+java.net.URL.openConnection()

@@ -1,0 +1,6 @@
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://settings/system
+android.hardware.Camera.open(int)
+android.telephony.TelephonyManager.getDeviceId()
+android.telephony.TelephonyManager.getLine1Number()
+java.net.Socket.<init>()
+java.net.URL.openConnection()

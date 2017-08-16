@@ -1,0 +1,6 @@
+android.content.ContentResolver.query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String, android.os.CancellationSignal) content://media/external/images/media
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://settings/system
+android.hardware.Camera.open(int)
+android.telephony.TelephonyManager.getDeviceId()
+java.net.Socket.<init>()
+java.net.URL.openConnection()

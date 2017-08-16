@@ -1,0 +1,13 @@
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://media/external/images/media/368
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://media/external/images/media/369
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://media/external/images/media/377
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://media/external/images/media/394
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://media/external/images/media/395
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://media/external/images/media/396
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://media/external/images/media/404
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://media/external/images/media/409
+android.content.ContentResolver.insert(android.net.Uri, android.content.ContentValues) content://media/external/images/media
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://settings/system
+android.hardware.Camera.open(int)
+android.telephony.TelephonyManager.getDeviceId()
+java.net.Socket.<init>()

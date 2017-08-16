@@ -1,0 +1,3 @@
+android.hardware.Camera.open(int)
+android.telephony.TelephonyManager.getDeviceId()
+java.net.Socket.<init>()

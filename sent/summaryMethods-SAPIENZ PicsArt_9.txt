@@ -1,0 +1,13 @@
+android.content.ContentResolver.query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String, android.os.CancellationSignal) content://com.facebook.katana.provider.AttributionIdProvider
+android.content.ContentResolver.query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String, android.os.CancellationSignal) content://com.picsart.studio.provider/notifications
+android.content.ContentResolver.query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String, android.os.CancellationSignal) content://com.picsart.studio.provider/uploads
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://com.picsart.studio.provider/user.update
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://settings/secure/accessibility_script_injection
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://settings/system
+android.location.LocationManager.getBestProvider(android.location.Criteria, boolean)
+android.location.LocationManager.getLastKnownLocation(java.lang.String)
+android.location.LocationManager.isProviderEnabled(java.lang.String)
+android.location.LocationManager.requestLocationUpdates(java.lang.String, long, float, android.location.LocationListener)
+android.location.LocationManager.requestLocationUpdates(java.lang.String, long, float, android.location.LocationListener, android.os.Looper)
+java.net.Socket.<init>()
+java.net.URL.openConnection()

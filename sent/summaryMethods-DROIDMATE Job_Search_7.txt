@@ -1,0 +1,1 @@
+android.content.ContentResolver.query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String, android.os.CancellationSignal) content://com.facebook.katana.provider.AttributionIdProvider

@@ -1,0 +1,9 @@
+android.content.ContentResolver.query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String, android.os.CancellationSignal) content://com.google.plus.platform/token
+android.content.ContentResolver.query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String, android.os.CancellationSignal) content://media/external/images/media
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://settings/secure/accessibility_script_injection
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://settings/system
+android.net.wifi.WifiManager$WifiLock.acquire()
+android.os.PowerManager$WakeLock.acquire()
+android.os.PowerManager$WakeLock.release(int)
+java.net.Socket.<init>()
+java.net.URL.openConnection()

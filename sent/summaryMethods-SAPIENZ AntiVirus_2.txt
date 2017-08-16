@@ -1,0 +1,17 @@
+android.app.ActivityManager.getRunningTasks(int)
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://browser/bookmarks
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://browser/searches
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://call_log/calls
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://com.android.browser/history
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://com.android.chrome.browser/bookmarks
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://com.android.chrome.browser/history
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://settings/system
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://sms/
+android.net.wifi.WifiManager.setWifiEnabled(boolean)
+android.os.PowerManager$WakeLock.acquire()
+android.os.PowerManager$WakeLock.release(int)
+android.telephony.TelephonyManager.getDeviceId()
+android.telephony.TelephonyManager.getLine1Number()
+android.telephony.TelephonyManager.getSimSerialNumber()
+java.net.Socket.<init>()
+java.net.URL.openConnection()

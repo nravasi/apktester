@@ -1,0 +1,11 @@
+android.app.ActivityManager.getRunningTasks(int)
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://call_log/calls
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://settings/system
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://sms/
+android.os.PowerManager$WakeLock.acquire()
+android.os.PowerManager$WakeLock.release(int)
+android.telephony.TelephonyManager.getDeviceId()
+android.telephony.TelephonyManager.getLine1Number()
+android.telephony.TelephonyManager.getSimSerialNumber()
+java.net.Socket.<init>()
+java.net.URL.openConnection()

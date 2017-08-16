@@ -1,0 +1,3 @@
+android.content.ContentResolver.query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String, android.os.CancellationSignal) content://com.google.plus.platform/token
+java.net.Socket.<init>()
+java.net.URL.openConnection()

@@ -1,0 +1,3 @@
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://settings/system
+java.net.Socket.<init>()
+java.net.URL.openConnection()

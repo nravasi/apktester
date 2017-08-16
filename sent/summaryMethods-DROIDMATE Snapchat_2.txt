@@ -1,0 +1,2 @@
+android.telephony.TelephonyManager.getDeviceId()
+java.net.Socket.<init>()

@@ -1,0 +1,59 @@
+android.app.ActivityManager.getRunningTasks(int)
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://call_log/calls
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://com.android.browser/history
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://com.android.contacts/contacts
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://com.android.contacts/data
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://com.android.contacts/emails
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://com.android.contacts/groups
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://com.android.contacts/groups_summary
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://com.android.contacts/postals
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://com.android.contacts/raw_contact_entities
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://com.android.contacts/raw_contacts
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://contacts/
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://contacts/calls
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://contacts/contact_methods
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://contacts/contact_methods/email
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://contacts/deleted_groups
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://contacts/deleted_people
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://contacts/extensions
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://contacts/groupmembership
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://contacts/groupmembershipraw
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://contacts/groups
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://contacts/organizations
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://contacts/people
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://contacts/people/with_email_or_im_filter
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://contacts/phones
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://contacts/photos
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://contacts/presence
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://contacts/settings
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://logs/historys
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://mms
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://mms-sms
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://mms/address
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://mms/inbox
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://mms/outbox
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://mms/part
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://mms/sent
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://sms
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://sms/inbox
+android.content.ContentResolver.delete(android.net.Uri, java.lang.String, java.lang.String[]) content://sms/sent
+android.content.ContentResolver.query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String, android.os.CancellationSignal) content://browser/bookmarks
+android.content.ContentResolver.query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String, android.os.CancellationSignal) content://browser/searches
+android.content.ContentResolver.query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String, android.os.CancellationSignal) content://com.android.browser/history
+android.content.ContentResolver.query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String, android.os.CancellationSignal) content://com.google.plus.platform/token
+android.content.ContentResolver.query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String, android.os.CancellationSignal) content://logs/historys
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://browser/bookmarks
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://browser/searches
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://call_log/calls
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://com.android.browser/history
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://com.android.chrome.browser/bookmarks
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://com.android.chrome.browser/history
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://settings/system
+android.content.ContentResolver.registerContentObserver(android.net.Uri, boolean, android.database.ContentObserver) content://sms/
+android.os.PowerManager$WakeLock.acquire()
+android.os.PowerManager$WakeLock.release(int)
+android.telephony.TelephonyManager.getDeviceId()
+android.telephony.TelephonyManager.getLine1Number()
+android.telephony.TelephonyManager.getSimSerialNumber()
+java.net.Socket.<init>()
+java.net.URL.openConnection()

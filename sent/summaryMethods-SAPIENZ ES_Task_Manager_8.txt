@@ -1,0 +1,3 @@
+android.telephony.TelephonyManager.getDeviceId()
+android.telephony.TelephonyManager.listen(android.telephony.PhoneStateListener, int)
+java.net.URL.openConnection()
