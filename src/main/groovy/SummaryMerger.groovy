@@ -15,7 +15,7 @@ class SummaryMerger {
         def nameCount = [:]
 
         def sourceDir = new File('./send/')
-        def targetDir =  new File('./sent/')
+        def targetDir =  new File('./results/summaries/')
 
         sourceDir.eachFile {
             def matcher = pattern.matcher(it.getName());

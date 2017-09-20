@@ -55,3 +55,8 @@ task maxes(dependsOn: 'classes', type: JavaExec) {
     main = 'MaxGenerator'
     classpath = sourceSets.main.runtimeClasspath
 }
+
+task sums(dependsOn: 'classes', type: JavaExec) {
+    main = 'SumsGenerator'
+    classpath = sourceSets.main.runtimeClasspath
+}

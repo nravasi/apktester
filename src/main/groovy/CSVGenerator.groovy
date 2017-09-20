@@ -10,7 +10,7 @@ class CSVGenerator {
     def static intervals = [1, 5, 10, 15, 30, 60, 120]
 
     public static void main(String[] args) {
-        def sendDir = new File('./sent/')
+        def sendDir = new File('./results/summaries')
 
         def output = ["Tool,App,Index,Minutes,Permissions"]
 
@@ -48,15 +48,6 @@ class CSVGenerator {
         new File('./results.csv').withWriter { out ->
             output.each {
                 out.println it
-            }
-        }
-
-        new File('./sums.csv').withWriter { out ->
-            out.println "Tool,Index,Permissions"
-            sums.each { k, v ->
-                v.eachWithIndex { val, idx ->
-                    out.println([k, idx + 1, val].join(','))
-                }
             }
         }
 

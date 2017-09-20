@@ -9,14 +9,9 @@ public class Config {
 
     public static String DROIDMATE_DIR = '/Users/nmravasi/thesis/d2/droidmate/dev/droidmate/';
     public static String SAPIENZ_DIR = '/Users/nmravasi/thesis/sapienz/';
-    public static String MONKEY_RUNNER_DIR = '';
-    public static String MONITOR_APK_DIR_IN_DEVICE = '';
-//    public static String SD_PATH =  '/storage/emulated/0/';
     public static String SD_PATH = '/storage/sdcard/';
     public static String SD_PATH_REL = SD_PATH;
     public static String APKS_PATH = 'apks';
-    public static String SDK = "C:\\Users\\Ignacio\\AppData\\Local\\Android\\Sdk\\tools";
-    public static String ADV_NAME = "Nexus_7_2012_Edited_API_19";
     public static String ADB_PATH = "/Users/nmravasi/Library/Android/sdk/platform-tools/adb";
     public static String AAPT_PATH = "/Users/nmravasi/Library/Android/sdk/build-tools/19.1.0/aapt";
     public static String ANDROID_TOOLS_PATH = "/Users/nmravasi/Library/Android/sdk/tools/";
@@ -35,7 +30,6 @@ public class Config {
 
     //Way until kill monkey 30 min would be 18000000 (in milliseconds )
     public static int TIMEOUT_BEFORE_KILL = 10000
-//    public static String RES_PATH = '/Volumes/WD/sent/'
     public static String RES_PATH = './res/'
 
     static updateConfig(Properties props) {

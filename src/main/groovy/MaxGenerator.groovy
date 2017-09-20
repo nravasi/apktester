@@ -9,7 +9,7 @@ class MaxGenerator {
     def static intervals = [1, 5, 10, 15, 30, 60, 120]
 
     public static void main(String[] args) {
-        def sendDir = new File('./sent/')
+        def sendDir = new File('./results/summaries/')
 
         def output = ["Tool,App,Minutes,Permissions"]
 
